@@ -1,0 +1,43 @@
+user@user:~$ sudo apt install nginx -y
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Уже установлен пакет nginx самой новой версии (1.24.0-2ubuntu7.1).
+Обновлено 0 пакетов, установлено 0 новых пакетов, для удаления отмечено 0 пакетов, и 0 пакетов не обновлено.
+user@user:~$ sudo systemctl status nginx
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: >
+     Active: active (running) since Sat 2024-12-14 23:26:28 MSK; 10min ago
+       Docs: man:nginx(8)
+   Main PID: 3805 (nginx)
+      Tasks: 6 (limit: 4920)
+     Memory: 1.6M (peak: 4.9M swap: 3.4M swap peak: 3.5M)
+        CPU: 24ms
+     CGroup: /system.slice/nginx.service
+             ├─3805 "nginx: master process /usr/sbin/nginx -g daemon on; mast>
+             ├─3806 "nginx: worker process"
+             ├─3807 "nginx: worker process"
+             ├─3808 "nginx: worker process"
+             ├─3809 "nginx: worker process"
+             └─3811 "nginx: worker process"
+
+дек 14 23:26:28 user systemd[1]: Starting nginx.service - A high performance >
+дек 14 23:26:28 user systemd[1]: Started nginx.service - A high performance w>
+lines 1-18/18 (END)
+user@user:~$ sudo mkdir -p /var/www/my-site
+user@user:~$ echo "<html><body><h1>Моя веб-страница</h1><img src='https://via.placeholder.com/300'></body></html>" | sudo tee /var/www/my-site/index.html
+<html><body><h1>Моя веб-страница</h1><img src='https://via.placeholder.com/300'></body></html>
+user@user:~$ sudo nano /etc/nginx/sites-available/my-site
+user@user:~$ sudo nano /etc/nginx/sites-available/my-site
+user@user:~$ sudo ln -s /etc/nginx/sites-available/my-site /etc/nginx/sites-enabled/
+ln: не удалось создать символьную ссылку '/etc/nginx/sites-enabled/my-site': Файл существует
+user@user:~$ echo "<html><body><h1>Моя веб-страница</h1><img src='https://via.placeholder.com/300'></body></html>" | sudo tee /var/www/my-site/index.html
+<html><body><h1>Моя веб-страница</h1><img src='https://via.placeholder.com/300'></body></html>
+user@user:~$ sudo nano /etc/nginx/sites-available/my-site
+user@user:~$ sudo ln -s /etc/nginx/sites-available/my-site /etc/nginx/sites-enabled/
+ln: не удалось создать символьную ссылку '/etc/nginx/sites-enabled/my-site': Файл существует
+user@user:~$ sudo systemctl restart nginx
+user@user:~$ curl http://127.0.0.1:8090
+<html><body><h1>Моя веб-страница</h1><img src='https://via.placeholder.com/300'></body></html>
+user@user:~$ ^C
+user@user:~$

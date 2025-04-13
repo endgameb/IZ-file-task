@@ -1,0 +1,33 @@
+apt install openssh-server
+cd /etc/passwd
+nano passwd
+Добавьте новую строку вида:
+
+username:x:1000:1000::/home/username:/bin/bash
+cd /etc/group
+nano /etc/group
+username:x:1000:
+systemctl start ssh
+systemctl enable ssh
+systemctl status sshd
+cd /etc/ssh/
+nano sshd_config 
+изменить строку PermitRootLogin 
+на PermitRootLogin no
+
+
+
+на виндовс 
+скачать putty,notepad++,WinSCP
+в виртуальной машине создать проброс портов 
+имя ssh
+протокол tcp
+адрес хоста 
+порт хоста 1337
+адрес гостя 127.0.1.1
+порт гостя 22
+
+на линукс машине изменить сетевой адаптер
+на сетевой мост 
+
+зайти на машину виндовс и ввести необходимые данные для подключения

@@ -1,0 +1,8 @@
+cd /etc/apt/
+nano sources.list
+добавьте строку с выбранным зеркалом:
+deb http://имя-зеркала.debian.org/debian stable main contrib non-free
+apt update
+at install curl
+curl https://ya.ru
+curl -v https://ya.ru

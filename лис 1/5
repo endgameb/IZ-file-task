@@ -1,0 +1,49 @@
+sudo apt install apache2
+curl http://127.0.0.1
+sudo nano /etc/apache2/sites-available/mysite.conf
+вписать:
+<VirtualHost *:8090>
+    ServerName mysite.local
+    DocumentRoot /var/www/mysite
+
+    <Directory /var/www/mysite>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+sudo mkdir /var/www/mysite
+sudo nano /var/www/mysite/index.html
+вписать:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Site</title>
+</head>
+<body>
+    <h1>Welcome to My Site</h1>
+    <img src="path/to/your/image.jpg" alt="My Image">
+</body>
+</html>
+
+
+sudo ufw status
+sudo ufw allow 8090
+
+
+sudo nano /etc/apache2/ports.conf
+вписать порт:
+Listen 8090
+
+
+sudo a2ensite mysite.conf
+sudo systemctl restart apache2
+
+
+curl http://127.0.0.1:8090
+
+
+

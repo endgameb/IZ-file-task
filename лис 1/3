@@ -1,0 +1,5 @@
+открыть wsl
+sudo apt update && sudo apt upgrade -y
+
+apt install gcc make mc python3 python3-pip -y
+

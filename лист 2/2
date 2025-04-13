@@ -1,0 +1,29 @@
+убунту!
+sudo add-apt-repository ppa:oisf/suricata-stable
+sudo apt update
+
+
+sudo apt install -y autoconf automake build-essential cargo cbindgen libjansson-dev libpcap-dev libpcre2-dev libtool libyaml-dev make pkg-config rustc zlib1g-dev
+
+
+sudo apt install -y suricata
+
+
+sudo systemctl enable suricata.service
+
+
+sudo systemctl start suricata.service
+
+
+sudo systemctl status suricata
+
+
+мониторинг и проверка статуса суриката
+sudo journalctl -u suricata -f
+
+sudo systemctl status suricata
+
+
+
+
+

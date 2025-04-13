@@ -1,0 +1,6 @@
+Notepad++
+hello_world.bat
+@echo off
+echo Hello World: %time%
+
+далее черес бланировщик заданий делаем скрипт исполняемым каждый день.

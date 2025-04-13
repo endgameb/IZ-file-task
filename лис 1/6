@@ -1,0 +1,36 @@
+systemctl restart apache2
+apt install mysql-server
+sudo mysql_secure_installation
+sudo mysql -u root
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+CREATE DATABASE newdb;
+GRANT ALL PRIVILEGES ON newdb.* TO 'newuser'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+
+mkdir /var/www/phpmyadmin
+cd /var/www/phpmyadmin
+wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip
+unzip phpMyAdmin-latest-all-languages.zip
+mv phpMyAdmin-*/* .
+rm -rf phpMyAdmin-*
+
+
+a2ensite 00-default.conf
+a2enmod rewrite
+systemctl restart apache2
+
+curl http://127.0.0.1:80/phpmyadmin/
+
+заходим в phpMyAdmin 
+находим бд newdb
+"SQL" в верхнем меню
+вставляем 
+CREATE TABLE test (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  field1 VARCHAR(255),
+  field2 VARCHAR(255)
+);
+и все)
+

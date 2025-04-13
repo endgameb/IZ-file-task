@@ -1,0 +1,216 @@
+kali + vds vpn!!!!
+развертка Kibana + Elasticsearch:
+
+
+Установка Elasticsearch:
+
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+sudo apt update
+sudo apt install elasticsearch
+-----------------------------------------------------------------------------------------------------
+вариант 2
+apt-key устарел(
+# 1. Скачиваем GPG-ключ и сохраняем его в рекомендуемом месте
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/elastic.gpg
+
+# 2. Добавляем репозиторий в отдельный файл
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+
+# 3. Обновляем списки пакетов
+sudo apt update
+используя любой vpn скачиваем архивы и распоковываем
+sudo dpkg -i filebeat-7.17.28-amd64.deb
+sudo dpkg -i kibana-7.17.28-amd64.deb
+sudo dpkg -i elasticsearch-7.17.28-amd64.deb
+
+отключить одну настройку в elasticsearch!!!!
+sudo nano /etc/elasticsearch/elasticsearch.yml
+xpack.security.enabled: false
+
+-----------------------------------------------------------------------------------------------------
+
+sudo systemctl start elasticsearch
+sudo systemctl start kibana
+sudo systemctl start filebeat
+
+проверка
+sudo systemctl status elasticsearch
+sudo systemctl status kibana
+sudo systemctl status filebeat
+
+Проверка доступности:
+
+    Elasticsearch: http://localhost:9200
+    Kibana: http://localhost:5601
+
+
+
+
+файл /etc/filebeat/filebeat.yml:
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/boot.log
+    - /var/log/dpkg.log
+    - /var/log/Xorg.*.log
+
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+# Below are the input specific configurations.
+
+# filestream is an input for collecting log messages from files.
+- type: journald
+  id: journald-filebeat
+  enabled: true
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+output.elasticsearch:
+  hosts: ["localhost:9200"]
+  index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+setup.template.name: "filebeat"
+setup.template.pattern: "filebeat-*"
+setup.ilm.enabled: false
+
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
+После сохранения файла выполнить:
+
+sudo filebeat test config
+sudo filebeat setup --index-management
+sudo systemctl restart filebeat
+
+проверить индексы:
+
+curl -X GET "localhost:9200/_cat/indices?v"
+
+Запуск Filebeat в режиме отладки чтобы увидеть процесс сбора логов:
+
+sudo filebeat -e -c /etc/filebeat/filebeat.yml
+
+
+
+После этого откроем Kibana (http://localhost:5601) и:
+        Перейдите в меню Stack Management -> Index Patterns
+        Нажмите "Create index pattern"
+        Введите "filebeat-*"
+        Выберите @timestamp как поле времени
+        Нажмите "Create index pattern"
+
+    Для просмотра логов:
+        Перейдите в меню Discover
+        Выберите индекс-паттерн filebeat-*
+        Установите временной диапазон "Last 15 minutes"
+
+
+
+Полезные фильтры для поиска:
+
+    log.level: ERROR - для поиска ошибок
+    log.level: WARNING - для поиска предупреждений
+    message: "Failed password" - для поиска неудачных попыток входа
+
+Подключение линукс:
+
+Установка Elasticsearch:
+
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+sudo apt update
+sudo apt install elasticsearch
+
+
+Настройка сбора логов:
+sudo apt install filebeat
+
+
+sudo systemctl start elasticsearch
+sudo systemctl start filebeat
+
+конфиг:
+sudo nano /etc/filebeat/filebeat.yml
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/boot.log
+    - /var/log/dpkg.log
+    - /var/log/Xorg.*.log
+
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+# Below are the input specific configurations.
+
+# filestream is an input for collecting log messages from files.
+- type: journald
+  id: journald-filebeat
+  enabled: true
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+output.elasticsearch:
+  hosts: ["192.168.31.121:9200"]
+  index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
+
+setup.template.name: "filebeat"
+setup.template.pattern: "filebeat-*"
+setup.ilm.enabled: false
+
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+
+sudo systemctl restart filebeat
+
+
+
+
+подключение виндовс машины
+конфиг
+winlogbeat.event_logs:
+  - name: Application
+    ignore_older: 72h
+  - name: Security
+  - name: System
+
+output.elasticsearch:
+  hosts: ["192.168.31.83:9200"]
+
+setup.kibana:
+  host: "192.168.31.83:5601"
+
+ph ввывод
+PS C:\Program Files\Elastic\Beats\8.17.4\winlogbeat> winlogbeat.exe test config -c .\winlogbeat.yml
+Config OK
+PS C:\Program Files\Elastic\Beats\8.17.4\winlogbeat> Start-Service winlogbeat
+PS C:\Program Files\Elastic\Beats\8.17.4\winlogbeat> Get-Service winlogbeat
+
+Status   Name               DisplayName
+------   ----               -----------
+Running  winlogbeat         Elastic Winlogbeat 8.17.4
+
+
+PS C:\Program Files\Elastic\Beats\8.17.4\winlogbeat>

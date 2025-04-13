@@ -1,0 +1,79 @@
+целевая машина:
+sudo apt install openssh-server
+
+на клиентской машине:
+ssh-keygen -t rsa
+
+ssh-copy-id user@10.0.2.7
+подключение
+
+ssh user@10.0.2.7
+успешно
+
+целевая машина:
+установка фаервола
+sudo apt install ufw
+
+настройка
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+ 
+sudo ufw allow http
+
+sudo ufw allow from 10.0.2.9 to any port 22
+sudo ufw allow from 10.0.2.9 to any port 23
+
+sudo ufw enable
+
+sudo ufw status numbered
+
+sudo ufw status verbose
+
+
+
+результат целевая машина:
+user@user:~$ sudo ufw default deny incoming
+Правило по умолчанию incoming изменено на «deny»
+(не забудьте соответственно обновить правила)
+user@user:~$ sudo ufw default allow outgoing
+Правило по умолчанию outgoing изменено на «allow»
+(не забудьте соответственно обновить правила)
+user@user:~$ sudo ufw allow http
+Правило добавлено
+Правило добавлено (v6)
+user@user:~$ sudo ufw allow from 10.0.2.9 to any port 22
+sudo ufw allow from 10.0.2.9 to any port 23
+Правило добавлено
+Правило добавлено
+user@user:~$ sudo ufw enable
+Межсетевой экран включён и будет запускаться при запуске системы
+user@user:~$ sudo ufw enable
+Межсетевой экран включён и будет запускаться при запуске системы
+user@user:~$ sudo ufw status numbered
+Состояние: активен
+
+     В                          Действие    Из
+     -                          --------    --
+[ 1] 80/tcp                     ALLOW IN    Anywhere                  
+[ 2] 22                         ALLOW IN    10.0.2.9                  
+[ 3] 23                         ALLOW IN    10.0.2.9                  
+[ 4] 80/tcp (v6)                ALLOW IN    Anywhere (v6)             
+
+user@user:~$ sudo ufw status verbose
+Состояние: активен
+Журналирование: on (low)
+По умолчанию: deny (входящие), allow (исходящие), disabled (маршрутизированные)
+Новые профили: skip
+
+В                          Действие    Из
+-                          --------    --
+80/tcp                     ALLOW IN    Anywhere                  
+22                         ALLOW IN    10.0.2.9                  
+23                         ALLOW IN    10.0.2.9                  
+80/tcp (v6)                ALLOW IN    Anywhere (v6)             
+
+user@user:~$ 
+
+машины находились в одной сети
+
+

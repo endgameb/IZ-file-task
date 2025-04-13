@@ -1,0 +1,206 @@
+Установка графаны и промисиус черес докер
+user@user:~$ git clone https://github.com/digitalstudium/grafana-docker-stack.git
+Команда «git» не найдена, но может быть установлена с помощью:
+sudo apt install git
+user@user:~$ sudo apt install git
+[sudo] пароль для user:     
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Будут установлены следующие дополнительные пакеты:
+  git-man liberror-perl
+Предлагаемые пакеты:
+  git-daemon-run | git-daemon-sysvinit git-doc git-email git-gui gitk gitweb
+  git-cvs git-mediawiki git-svn
+Следующие НОВЫЕ пакеты будут установлены:
+  git git-man liberror-perl
+Обновлено 0 пакетов, установлено 3 новых пакетов, для удаления отмечено 0 пакетов, и 0 пакетов не обновлено.
+Необходимо скачать 4 804 kB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 24,5 MB.
+Хотите продолжить? [Д/н] 
+Пол:1 http://archive.ubuntu.com/ubuntu noble/main amd64 liberror-perl all 0.17029-2 [25,6 kB]
+Пол:2 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 git-man all 1:2.43.0-1ubuntu7.1 [1 100 kB]
+Пол:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 git amd64 1:2.43.0-1ubuntu7.1 [3 679 kB]
+Получено 4 804 kB за 2с (2 965 kB/s)       
+Выбор ранее не выбранного пакета liberror-perl.
+(Чтение базы данных … на данный момент установлено 550153 файла и каталога.)
+Подготовка к распаковке …/liberror-perl_0.17029-2_all.deb …
+Распаковывается liberror-perl (0.17029-2) …
+Выбор ранее не выбранного пакета git-man.
+Подготовка к распаковке …/git-man_1%3a2.43.0-1ubuntu7.1_all.deb …
+Распаковывается git-man (1:2.43.0-1ubuntu7.1) …
+Выбор ранее не выбранного пакета git.
+Подготовка к распаковке …/git_1%3a2.43.0-1ubuntu7.1_amd64.deb …
+Распаковывается git (1:2.43.0-1ubuntu7.1) …
+Настраивается пакет liberror-perl (0.17029-2) …
+Настраивается пакет git-man (1:2.43.0-1ubuntu7.1) …
+Настраивается пакет git (1:2.43.0-1ubuntu7.1) …
+Обрабатываются триггеры для man-db (2.12.0-4build2) …
+user@user:~$ git clone https://github.com/digitalstudium/grafana-docker-stack.git
+Клонирование в «grafana-docker-stack»...
+remote: Enumerating objects: 56, done.
+remote: Counting objects: 100% (56/56), done.
+remote: Compressing objects: 100% (43/43), done.
+remote: Total 56 (delta 22), reused 34 (delta 10), pack-reused 0 (from 0)
+Получение объектов: 100% (56/56), 49.41 КиБ | 1.03 МиБ/с, готово.
+Определение изменений: 100% (22/22), готово.
+user@user:~$ docker  swarm init
+Команда «docker» не найдена, но может быть установлена с помощью:
+sudo apt install docker.io      # version 24.0.7-0ubuntu4.1, or
+sudo apt install podman-docker  # version 4.9.3+ds1-1ubuntu0.2
+user@user:~$ sudo apt install docker.io 
+Чтение списков пакетов… Готово
+Построение дерева зависимостей… Готово
+Чтение информации о состоянии… Готово         
+Будут установлены следующие дополнительные пакеты:
+  bridge-utils containerd pigz runc ubuntu-fan
+Предлагаемые пакеты:
+  ifupdown aufs-tools cgroupfs-mount | cgroup-lite debootstrap docker-buildx
+  docker-compose-v2 docker-doc rinse
+Следующие НОВЫЕ пакеты будут установлены:
+  bridge-utils containerd docker.io pigz runc ubuntu-fan
+Обновлено 0 пакетов, установлено 6 новых пакетов, для удаления отмечено 0 пакетов, и 0 пакетов не обновлено.
+Необходимо скачать 79,8 MB архивов.
+После данной операции объём занятого дискового пространства возрастёт на 303 MB.
+Хотите продолжить? [Д/н] 
+Пол:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 pigz amd64 2.8-1 [65,6 kB]
+Пол:2 http://archive.ubuntu.com/ubuntu noble/main amd64 bridge-utils amd64 1.7.1-1ubuntu2 [33,9 kB]
+Пол:3 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 runc amd64 1.1.12-0ubuntu3.1 [8 599 kB]
+Пол:4 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 containerd amd64 1.7.19+really1.7.12-0ubuntu4.2 [38,6 MB]
+Пол:5 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 docker.io amd64 26.1.3-0ubuntu1~24.04.1 [32,4 MB]
+Пол:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 ubuntu-fan all 0.12.16 [35,2 kB]
+Получено 79,8 MB за 8с (10,2 MB/s)                                             
+Предварительная настройка пакетов …
+Выбор ранее не выбранного пакета pigz.
+(Чтение базы данных … на данный момент установлено 551236 файлов и каталогов.)
+Подготовка к распаковке …/0-pigz_2.8-1_amd64.deb …
+Распаковывается pigz (2.8-1) …
+Выбор ранее не выбранного пакета bridge-utils.
+Подготовка к распаковке …/1-bridge-utils_1.7.1-1ubuntu2_amd64.deb …
+Распаковывается bridge-utils (1.7.1-1ubuntu2) …
+Выбор ранее не выбранного пакета runc.
+Подготовка к распаковке …/2-runc_1.1.12-0ubuntu3.1_amd64.deb …
+Распаковывается runc (1.1.12-0ubuntu3.1) …
+Выбор ранее не выбранного пакета containerd.
+Подготовка к распаковке …/3-containerd_1.7.19+really1.7.12-0ubuntu4.2_amd64.deb 
+…
+Распаковывается containerd (1.7.19+really1.7.12-0ubuntu4.2) …
+Выбор ранее не выбранного пакета docker.io.
+Подготовка к распаковке …/4-docker.io_26.1.3-0ubuntu1~24.04.1_amd64.deb …
+Распаковывается docker.io (26.1.3-0ubuntu1~24.04.1) …
+Выбор ранее не выбранного пакета ubuntu-fan.
+Подготовка к распаковке …/5-ubuntu-fan_0.12.16_all.deb …
+Распаковывается ubuntu-fan (0.12.16) …
+Настраивается пакет runc (1.1.12-0ubuntu3.1) …
+Настраивается пакет bridge-utils (1.7.1-1ubuntu2) …
+Настраивается пакет pigz (2.8-1) …
+Настраивается пакет containerd (1.7.19+really1.7.12-0ubuntu4.2) …
+Created symlink /etc/systemd/system/multi-user.target.wants/containerd.service →
+ /usr/lib/systemd/system/containerd.service.
+Настраивается пакет ubuntu-fan (0.12.16) …
+Created symlink /etc/systemd/system/multi-user.target.wants/ubuntu-fan.service →
+ /usr/lib/systemd/system/ubuntu-fan.service.
+Настраивается пакет docker.io (26.1.3-0ubuntu1~24.04.1) …
+info: Выбирается GID из диапазона от 100 по 999 ...
+info: Добавляется группа «docker» (GID 128) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/docker.service → /us
+r/lib/systemd/system/docker.service.
+Created symlink /etc/systemd/system/sockets.target.wants/docker.socket → /usr/li
+b/systemd/system/docker.socket.
+Обрабатываются триггеры для man-db (2.12.0-4build2) …
+user@user:~$ docker  swarm init
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post "http://%2Fvar%2Frun%2Fdocker.sock/v1.45/swarm/init": dial unix /var/run/docker.sock: connect: permission denied
+user@user:~$ docker swarm init
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post "http://%2Fvar%2Frun%2Fdocker.sock/v1.45/swarm/init": dial unix /var/run/docker.sock: connect: permission denied
+user@user:~$ docker stack deploy -c grafana-docker-stack/docker-compose.yml monitoring
+Since --detach=false was not specified, tasks will be created in the background.
+In a future release, --detach=false will become the default.
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.45/info": dial unix /var/run/docker.sock: connect: permission denied
+user@user:~$ sudo docker swarm init
+Swarm initialized: current node (q8usyuh957a6syd4ynyj48o1q) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-0xpdcjl234hiul5mrx9dwwgaz80nwg9qh6pscxvairtd2xydjd-9tg4cguhblkc8i5e72ttq8nxj 192.168.31.191:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+user@user:~$ sudo docker stack deploy -c grafana-docker-stack/docker-compose.yml monitoring
+Since --detach=false was not specified, tasks will be created in the background.
+In a future release, --detach=false will become the default.
+Creating network monitoring_default
+Creating service monitoring_grafana
+Creating service monitoring_prometheus
+Creating service monitoring_node-exporter
+user@user:~$ sudo docker ps
+CONTAINER ID   IMAGE                          COMMAND                  CREATED              STATUS              PORTS      NAMES
+2c033f774bdf   prom/node-exporter:v1.3.1      "/bin/node_exporter …"   About a minute ago   Up About a minute   9100/tcp   monitoring_node-exporter.1.xd6ja84ncl8qyakry6x1fu9dy
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   About a minute ago   Up About a minute   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+8fcb580bd356   grafana/grafana:8.5.3-ubuntu   "/run.sh"                About a minute ago   Up About a minute   3000/tcp   monitoring_grafana.1.91tizswaf0yj9uxjpan01t7fk
+user@user:~$ sudo nano /var/lib/docker/volumes/monitoring_prom-configs/_data/prometheus.yml
+[sudo] пароль для user:     
+user@user:~$ sudo nano /var/lib/docker/volumes/monitoring_prom-configs/_data/prometheus.yml
+user@user:~$ sudo ps | grep prometheus
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   26 minutes ago   Up 26 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 34c941071a1d
+Error response from daemon: cannot kill container: 34c941071a1d: No such container: 34c941071a1d
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   29 minutes ago   Up 29 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo nano /var/lib/docker/volumes/monitoring_prom-configs/_data/prometheus.yml
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   33 minutes ago   Up 33 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo nano /var/lib/docker/volumes/monitoring_prom-configs/_data/prometheus.yml
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   38 minutes ago   Up 38 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo nano /var/lib/docker/volumes/monitoring_prom-configs/_data/prometheus.yml
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   39 minutes ago   Up 39 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   42 minutes ago   Up 42 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker swarm init
+Error response from daemon: This node is already part of a swarm. Use "docker swarm leave" to leave this swarm and join another one.
+user@user:~$ docker stack deploy -c grafana-docker-stack/docker-compose.yml monitoring
+Since --detach=false was not specified, tasks will be created in the background.
+In a future release, --detach=false will become the default.
+permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.45/info": dial unix /var/run/docker.sock: connect: permission denied
+user@user:~$ sudo docker stack deploy -c grafana-docker-stack/docker-compose.yml monitoring
+Since --detach=false was not specified, tasks will be created in the background.
+In a future release, --detach=false will become the default.
+Updating service monitoring_node-exporter (id: 80f5518csvmauj3bcq1ql7cqa)
+Updating service monitoring_grafana (id: k0sjqlkycwfvazit13p8z77g2)
+Updating service monitoring_prometheus (id: udtdbdsan7il02so8arsknmj8)
+user@user:~$ sudo docker ps
+CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS      NAMES
+2c033f774bdf   prom/node-exporter:v1.3.1      "/bin/node_exporter …"   45 minutes ago   Up 45 minutes   9100/tcp   monitoring_node-exporter.1.xd6ja84ncl8qyakry6x1fu9dy
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   45 minutes ago   Up 45 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+8fcb580bd356   grafana/grafana:8.5.3-ubuntu   "/run.sh"                45 minutes ago   Up 45 minutes   3000/tcp   monitoring_grafana.1.91tizswaf0yj9uxjpan01t7fk
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   45 minutes ago   Up 45 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   50 minutes ago   Up 50 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo nano /var/lib/docker/volumes/monitoring_prom-configs/_data/prometheus.yml
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   51 minutes ago   Up 51 minutes   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+user@user:~$ sudo nano /var/lib/docker/volumes/monitoring_prom-configs/_data/prometheus.yml
+user@user:~$ sudo docker ps | grep prometheus
+8f310f222862   prom/prometheus:v2.36.0        "/bin/prometheus --c…"   About an hour ago   Up About an hour   9090/tcp   monitoring_prometheus.1.vmwu3yrq4sdxrkcffs4vlt4ow
+user@user:~$ sudo docker kill -s SIGHUP 8f310f222862
+8f310f222862
+
